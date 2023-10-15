@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "timestamp"
+version = "0.1.0"
+description = ""
+authors = ["tclesius <tomclesius@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.103.2"
+sqlalchemy = "^2.0.22"
+pip = "^23.2.1"
+install = "^1.3.5"
+pydantic-settings = "^2.0.3"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+uvicorn = "^0.23.2"
+psycopg = {extras = ["binary"], version = "^3.1.12"}
+passlib = "^1.7.4"
+python-multipart = "^0.0.6"
+pydantic = {extras = ["email"], version = "^2.4.2"}
+alembic = "^1.12.0"
+bcrypt = "^4.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
