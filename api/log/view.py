@@ -9,21 +9,13 @@ from api.database.schema.user import User
 from api.database.session import get_session
 from api.log.model import PostTrackResponse
 from api.log.service import stamp_in_out, get_newest_log
-from api.user.service import get_user_by_rfid_token
 
 router = APIRouter(prefix='/log')
 
 
-@router.post("/stamp-web", response_model=PostTrackResponse)
-async def post_track_web(session: Annotated[Session, Depends(get_session)],
-                         user: Annotated[User, Depends(get_current_user)]):
-    return stamp_in_out(session, user)
-
-
-@router.post("/stamp-rfid", response_model=PostTrackResponse)
-async def post_track_rfid(session: Annotated[Session, Depends(get_session)],
-                          rfid_token: Annotated[str, Query(min_length=8, max_length=8)] = None):
-    user = get_user_by_rfid_token(session, rfid_token)
+@router.post("/stampinout", response_model=PostTrackResponse)
+async def post_stampinout(session: Annotated[Session, Depends(get_session)],
+                          user: Annotated[User, Depends(get_current_user)]):
     return stamp_in_out(session, user)
 
 

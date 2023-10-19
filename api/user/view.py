@@ -24,9 +24,9 @@ async def register_user(email: EmailStr,
                         first_name: str,
                         last_name: str,
                         session: Annotated[Session, Depends(get_session)],
-                        rfid_token: Annotated[str, Query(min_length=8, max_length=8)] = None):
+                        pairing_token: Annotated[str, Query(min_length=8, max_length=8)] = None):
     user = get_user_by_email(session, email)
     if user is not None:
         raise exceptions.EMAIL_ALREADY_REGISTERED
-    create_user(session, rfid_token, email, get_password_hash(password), first_name, last_name)
+    create_user(session, pairing_token, email, get_password_hash(password), first_name, last_name)
     return {"message": "success"}
