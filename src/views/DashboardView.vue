@@ -6,13 +6,13 @@ import {useAuthStore} from "@/stores/authStore";
 import {useTimeStore} from "@/stores/timeStore";
 import {storeToRefs} from "pinia";
 
-const { currentUser } = useAuthStore()
+const { currentUser, applyLocalStorageToken } = useAuthStore()
 const { refreshTimer, fetchData, stampInOut } = useTimeStore()
 const { data, buttonText} = storeToRefs(useTimeStore())
 
 const timerInterval = setInterval(refreshTimer, 1000);
 
-onMounted(fetchData)
+onMounted(()=>{applyLocalStorageToken();fetchData()})
 onBeforeUnmount(() => {clearInterval(timerInterval);});
 </script>
 

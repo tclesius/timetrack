@@ -17,7 +17,7 @@ export const useTimeStore = defineStore('time', () => {
         data.value.message = response.message
         data.value.start_timestamp = response.start_timestamp
         data.value.end_timestamp = response.end_timestamp
-        buttonText.value = (data.value.end_timestamp === null && data.value.start_timestamp !== null) ? "Stamp In" : "Stamp Out"
+        buttonText.value = (data.value.end_timestamp === null && data.value.start_timestamp !== null) ? "Stamp Out" : "Stamp In"
     }
 
     async function stampInOut() {
@@ -25,7 +25,7 @@ export const useTimeStore = defineStore('time', () => {
         data.value.message = response.message
         data.value.start_timestamp = response.start_timestamp
         data.value.end_timestamp = response.end_timestamp
-        buttonText.value = (data.value.end_timestamp === null && data.value.start_timestamp !== null) ? "Stamp In" : "Stamp Out"
+        buttonText.value = (data.value.end_timestamp === null && data.value.start_timestamp !== null) ? "Stamp Out" : "Stamp In"
     }
 
     function refreshDate() {

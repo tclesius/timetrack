@@ -20,7 +20,7 @@ def get_newest_log(session: Session, user: User) -> Log | None:
 def stamp_in_out(session: Session, user: User) -> dict:
     log = get_newest_log(session, user)
 
-    if log.end_timestamp is None:
+    if log is not None and log.end_timestamp is None:
         log.end_timestamp = datetime.now(UTC)
         session.add(log)
         session.commit()

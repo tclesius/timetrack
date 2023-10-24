@@ -61,6 +61,8 @@ export const useAuthStore = defineStore('auth',()=>{
         const access_token = localStorage.getItem("access_token")
         if (access_token !== null) {
             OpenAPI.TOKEN = access_token
+            const meResponse = await DefaultService.readUsersMeUserMeGet()
+            currentUser.value = meResponse.first_name
             return true
         }
         return false
