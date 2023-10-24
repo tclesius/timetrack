@@ -22,10 +22,14 @@ async def post_stampinout(session: Annotated[Session, Depends(get_session)],
 @router.get("/stats")
 async def get_stats(session: Annotated[Session, Depends(get_session)],
                     user: Annotated[User, Depends(get_current_user)]):
-    log = get_newest_log(session, user)
+    if log := get_newest_log(session, user):
+        return {
+            "message": "",
+            "start_timestamp": log.start_timestamp,
+            "end_timestamp": log.end_timestamp
+        }
     return {
-        "status": "success",
-        "message": f"",
-        "start_timestamp": log.start_timestamp,
-        "end_timestamp": log.end_timestamp
+        "message": "",
+        "start_timestamp": None,
+        "end_timestamp": None
     }

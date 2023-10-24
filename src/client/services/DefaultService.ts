@@ -30,7 +30,7 @@ export class DefaultService {
      * @param password 
      * @param firstName 
      * @param lastName 
-     * @param rfidToken 
+     * @param pairingToken 
      * @returns any Successful Response
      * @throws ApiError
      */
@@ -39,7 +39,7 @@ email: string,
 password: string,
 firstName: string,
 lastName: string,
-rfidToken?: string,
+pairingToken?: string,
 ): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
@@ -49,7 +49,7 @@ rfidToken?: string,
                 'password': password,
                 'first_name': firstName,
                 'last_name': lastName,
-                'rfid_token': rfidToken,
+                'pairing_token': pairingToken,
             },
             errors: {
                 422: `Validation Error`,
@@ -58,35 +58,14 @@ rfidToken?: string,
     }
 
     /**
-     * Post Track Web
+     * Post Stampinout
      * @returns PostTrackResponse Successful Response
      * @throws ApiError
      */
-    public static postTrackWebLogStampWebPost(): CancelablePromise<PostTrackResponse> {
+    public static postStampinoutLogStampinoutPost(): CancelablePromise<PostTrackResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/log/stamp-web',
-        });
-    }
-
-    /**
-     * Post Track Rfid
-     * @param rfidToken 
-     * @returns PostTrackResponse Successful Response
-     * @throws ApiError
-     */
-    public static postTrackRfidLogStampRfidPost(
-rfidToken?: string,
-): CancelablePromise<PostTrackResponse> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/log/stamp-rfid',
-            query: {
-                'rfid_token': rfidToken,
-            },
-            errors: {
-                422: `Validation Error`,
-            },
+            url: '/log/stampinout',
         });
     }
 
@@ -116,6 +95,48 @@ formData: Body_login_for_access_token_auth_token_post,
             url: '/auth/token',
             formData: formData,
             mediaType: 'application/x-www-form-urlencoded',
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Get Pairing Token
+     * @param sn 
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static getPairingTokenChipPairingTokenGet(
+sn: number,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/chip/pairing-token',
+            query: {
+                'sn': sn,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Claim Pairing Token
+     * @param pairingToken 
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static claimPairingTokenChipPairingTokenPost(
+pairingToken: string,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/chip/pairing-token',
+            query: {
+                'pairing_token': pairingToken,
+            },
             errors: {
                 422: `Validation Error`,
             },

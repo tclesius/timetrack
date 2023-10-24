@@ -10,7 +10,7 @@ export const useAuthStore = defineStore('auth',()=>{
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     async function register(
-        rfid_token: string,
+        pairing_token: string,
         email:string,
         first_name: string,
         last_name: string,
@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth',()=>{
         if (!emailRegex.test(<string>email)){
             return {message: "The provided email is invalid."}
         }
-        if (rfid_token !== "" && rfid_token?.length != 8){
+        if (pairing_token !== "" && pairing_token?.length != 8){
             return {message: "Token has wrong length please check your input."}
         }
         if (password !== password_confirmation){
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth',()=>{
             return {message: "Password must have at least 8 characters."}
         }
         loading.value = true
-        const response = await DefaultService.registerUserUserRegisterPost(email,password,first_name,last_name, rfid_token == "" ? null : rfid_token);
+        const response = await DefaultService.registerUserUserRegisterPost(email,password,first_name,last_name, pairing_token == "" ? null : pairing_token);
         //TODO check if register is successful in backend
         loading.value = false
         return response
@@ -57,11 +57,13 @@ export const useAuthStore = defineStore('auth',()=>{
         OpenAPI.TOKEN = ""
         localStorage.clear()
     }
-    function applyLocalStorageToken(){
+    async function applyLocalStorageToken(){
         const access_token = localStorage.getItem("access_token")
         if (access_token !== null) {
-            OpenAPI.TOKEN = <string> localStorage.getItem("access_token")
+            OpenAPI.TOKEN = access_token
+            return true
         }
+        return false
     }
 
     return {login, register, currentUser, loading, applyLocalStorageToken}

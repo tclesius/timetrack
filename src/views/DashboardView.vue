@@ -10,9 +10,6 @@ const { currentUser } = useAuthStore()
 const { refreshTimer, fetchData, stampInOut } = useTimeStore()
 const { data, buttonText} = storeToRefs(useTimeStore())
 
-const date = ref("14.October.2023")
-const sessionLength = ref("5:22:59")
-
 const timerInterval = setInterval(refreshTimer, 1000);
 
 onMounted(fetchData)

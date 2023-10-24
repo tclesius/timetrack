@@ -9,7 +9,7 @@ import {useAuthStore} from "@/stores/authStore";
 const { register } = useAuthStore()
 
 const formData = ref({
-  rfid_token:"",
+  pairing_token:"",
   email:"",
   first_name:"",
   last_name:"",
@@ -28,7 +28,7 @@ const formData = ref({
         placeholder="Type in your chip token"
         :required="false"
         type="email"
-        v-model:input-value="formData.rfid_token"
+        v-model:input-value="formData.pairing_token"
     >
       <MaterialSymbolsContactSupport style="width: 24px; height: 24px; cursor: pointer"/>
     </InputComponent>
@@ -80,7 +80,7 @@ const formData = ref({
       <p>Already have an Account? <router-link to="/login">Login</router-link></p>
     </div>
 
-    <ButtonComponent @click.native="console.log(register(formData.rfid_token, formData.email, formData.first_name, formData.last_name, formData.password, formData.password_confirmation))">
+    <ButtonComponent @click.native="console.log(register(formData.pairing_token, formData.email, formData.first_name, formData.last_name, formData.password, formData.password_confirmation))">
       SEND
     </ButtonComponent>
   </div>
