@@ -3,6 +3,7 @@ import { ref, defineProps, computed } from 'vue';
 
 const {label, placeholder, required, type, inputValue, cclass} = defineProps({
   'cclass': String,
+  'name': String,
   'label': String,
   'placeholder': String,
   'required': Boolean,
@@ -29,7 +30,8 @@ defineEmits(['update:inputValue'])
 <template>
   <label :for="inputId" class="label-row" v-if="label">{{ label }}<span class="required-star" v-if="required">*</span></label>
   <div class="input-row">
-    <input :id="inputId"
+    <Field :id="inputId"
+           :name="name"
            :value="inputValue"
            @input="$emit('update:inputValue', $event.target.value)"
            :placeholder="placeholder"

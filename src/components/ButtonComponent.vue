@@ -1,10 +1,4 @@
 <script setup>
-import { defineProps, ref } from 'vue';
-
-const { required } = defineProps({
-  'required': Boolean,
-});
-
 defineEmits(['update:buttonClick'])
 </script>
 
